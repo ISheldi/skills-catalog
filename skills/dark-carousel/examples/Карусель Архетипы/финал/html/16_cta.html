@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1350px; overflow: hidden; background: #EFEAE0; }
+  .frame {
+    position: relative; width: 1080px; height: 1350px;
+    background: #EFEAE0;
+    font-family: 'Inter', sans-serif;
+    color: #1A1A1A; overflow: hidden;
+  }
+  /* Background grid drift */
+  .grid-overlay {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(#CFC4A8 1px, transparent 1px) 0 0/40px 40px,
+      linear-gradient(90deg, #CFC4A8 1px, transparent 1px) 0 0/40px 40px;
+    opacity: 0.32; pointer-events: none;
+    animation: gridShift 10s linear infinite;
+  }
+  @keyframes gridShift {
+    from { background-position: 0 0, 0 0; }
+    to   { background-position: 40px 40px, 40px 40px; }
+  }
+  /* Bookmark stamp-in */
+  .bookmark {
+    position: absolute; top: 36px; left: 56px;
+    width: 38px; height: 60px; background: #E85A2C;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
+    z-index: 5;
+    transform: scale(0);
+    animation: stampIn 0.4s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  @keyframes stampIn {
+    from { transform: scale(0) rotate(-30deg); }
+    to   { transform: scale(1) rotate(0); }
+  }
+  /* Counter: JetBrains Mono fixes width crop bug */
+  .meta-tl {
+    position: absolute; top: 56px; left: 116px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700; font-size: 22px; letter-spacing: 0.5px;
+    color: #1A1A1A; z-index: 6;
+    padding-right: 8px;
+    opacity: 0;
+    animation: fadeIn 0.3s 0.2s forwards;
+  }
+  /* Nick charStagger (буквы сходятся) */
+  .nick {
+    position: absolute; bottom: 36px; left: 56px;
+    font-weight: 800; font-size: 22px; color: #1A1A1A; letter-spacing: 8px; z-index: 5;
+    opacity: 0;
+    animation: charStagger 0.8s 1.0s forwards;
+  }
+  @keyframes charStagger {
+    from { opacity: 0; letter-spacing: 30px; }
+    to   { opacity: 1; letter-spacing: 1px; }
+  }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  .center-block {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 0 56px; z-index: 4;
+    -webkit-mask-image: linear-gradient(135deg, #000 50%, transparent 50%);
+            mask-image: linear-gradient(135deg, #000 50%, transparent 50%);
+    -webkit-mask-size: 250% 250%;
+            mask-size: 250% 250%;
+    -webkit-mask-position: 100% 100%;
+            mask-position: 100% 100%;
+    animation: maskReveal 0.6s 0.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes maskReveal {
+    to { -webkit-mask-position: 0% 0%; mask-position: 0% 0%; }
+  }
+  .save-icon {
+    width: 110px; height: 170px; background: #E85A2C;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
+    margin-bottom: 36px;
+    transform-origin: top center;
+    animation: savePulse 2.5s 1.0s ease-in-out infinite;
+  }
+  @keyframes savePulse {
+    0%, 100% { filter: drop-shadow(0 0 0 rgba(232, 90, 44, 0)); transform: scale(1); }
+    50%      { filter: drop-shadow(0 0 24px rgba(232, 90, 44, 0.7)); transform: scale(1.04); }
+  }
+  .quote {
+    font-weight: 900; font-size: 88px; line-height: 0.96;
+    color: #1A1A1A; letter-spacing: -3px;
+  }
+  .quote .accent { color: #E85A2C; }
+  .author {
+    font-weight: 800; font-size: 26px; color: #E85A2C;
+    margin-top: 24px; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .sub {
+    font-weight: 800; font-size: 30px; color: #1A1A1A;
+    margin-top: 60px; line-height: 1.3; max-width: 760px;
+    letter-spacing: -0.3px;
+  }
+  .sub .accent { color: #E85A2C; }
+  .nick-big {
+    position: absolute; bottom: 90px; left: 56px;
+    font-weight: 900; font-size: 56px; color: #1A1A1A;
+    letter-spacing: -1px; z-index: 5;
+    opacity: 0;
+    animation: nickBig 0.7s 1.0s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes nickBig {
+    from { opacity: 0; transform: translateY(20px); letter-spacing: 4px; }
+    to   { opacity: 1; transform: translateY(0);    letter-spacing: -1px; }
+  }
+  .nick-big .at { color: #E85A2C; }
+</style></head><body>
+<div class="frame">
+  <div class="grid-overlay"></div>
+  <div class="bookmark"></div>
+  <div class="meta-tl">16/16</div>
+  <div class="center-block">
+    <div class="save-icon"></div>
+    <div class="quote">ЕСЛИ НЕ <span class="accent">РАСТЁШЬ —</span><br>ТЫ НЕ В СВОЕЙ<br>СТРАТЕГИИ.</div>
+    <div class="author">— НИКА ЗЕБРА</div>
+    <div class="sub">Сохрани карусель — и <span class="accent">найди свой архетип.</span> Это твоя точка роста.</div>
+  </div>
+  <div class="nick-big"><span class="at">@</span>your_handle</div>
+</div></body></html>

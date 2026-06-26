@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0c;
+  --foreground: #ededed;
 }
 
 @theme inline {
@@ -12,15 +12,69 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
 }
+
+/* Markdown rendering inside skill pages */
+.skill-md {
+  color: #c8c8cf;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.skill-md h1 { font-size: 1.6rem; font-weight: 800; color: #fff; margin: 1.4em 0 0.5em; letter-spacing: -0.02em; }
+.skill-md h2 { font-size: 1.25rem; font-weight: 700; color: #fff; margin: 1.4em 0 0.5em; }
+.skill-md h3 { font-size: 1.05rem; font-weight: 700; color: #e8e8ee; margin: 1.2em 0 0.4em; }
+.skill-md h1:first-child, .skill-md h2:first-child, .skill-md h3:first-child { margin-top: 0; }
+.skill-md p { margin: 0.7em 0; }
+.skill-md ul, .skill-md ol { margin: 0.7em 0; padding-left: 1.4em; }
+.skill-md ul { list-style: disc; }
+.skill-md ol { list-style: decimal; }
+.skill-md li { margin: 0.3em 0; }
+.skill-md a { color: #818cf8; text-decoration: underline; text-underline-offset: 2px; }
+.skill-md a:hover { color: #a5b4fc; }
+.skill-md strong { color: #fff; font-weight: 600; }
+.skill-md code {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 0.1em 0.4em;
+  font-size: 0.88em;
+  font-family: var(--font-geist-mono), monospace;
+  color: #6ee7b7;
+}
+.skill-md pre {
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 1em 1.2em;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+.skill-md pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #c8c8cf;
+}
+.skill-md blockquote {
+  border-left: 3px solid rgba(129,140,248,0.5);
+  padding-left: 1em;
+  margin: 1em 0;
+  color: #a0a0aa;
+}
+.skill-md table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 0.92em;
+}
+.skill-md th, .skill-md td {
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 0.5em 0.8em;
+  text-align: left;
+}
+.skill-md th { background: rgba(255,255,255,0.04); color: #fff; font-weight: 600; }
+.skill-md hr { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 1.5em 0; }

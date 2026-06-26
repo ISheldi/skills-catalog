@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1350px; overflow: hidden; background: #EFEAE0; }
+
+  .frame {
+    position: relative; width: 1080px; height: 1350px;
+    background: #EFEAE0;
+    font-family: 'Inter', sans-serif;
+    color: #1A1A1A; overflow: hidden;
+    animation: cameraShake 0.4s 0.6s ease-in-out;
+  }
+  /* === CAMERA SHAKE: лёгкая дрожь при появлении номера === */
+  @keyframes cameraShake {
+    0%, 100% { transform: translate(0, 0); }
+    20%      { transform: translate(-3px, 2px); }
+    40%      { transform: translate(3px, -2px); }
+    60%      { transform: translate(-2px, -1px); }
+    80%      { transform: translate(2px, 2px); }
+  }
+
+  .grid-overlay {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(#CFC4A8 1px, transparent 1px) 0 0/40px 40px,
+      linear-gradient(90deg, #CFC4A8 1px, transparent 1px) 0 0/40px 40px;
+    opacity: 0.32; pointer-events: none;
+    animation: gridShift 8s linear infinite;
+  }
+  @keyframes gridShift {
+    from { background-position: 0 0, 0 0; }
+    to   { background-position: 40px 40px, 40px 40px; }
+  }
+
+  .bookmark {
+    position: absolute; top: 36px; left: 56px;
+    width: 38px; height: 60px; background: #E85A2C;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
+    z-index: 5;
+    transform: scale(0);
+    animation: stampIn 0.4s 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  @keyframes stampIn {
+    from { transform: scale(0) rotate(-30deg); }
+    to   { transform: scale(1) rotate(0); }
+  }
+
+  .meta-tl {
+    position: absolute; top: 56px; left: 116px;
+    font-weight: 800; font-size: 22px; letter-spacing: 0.5px; z-index: 5;
+    opacity: 0;
+    animation: fadeIn 0.5s 0.7s forwards;
+  }
+
+  /* === MARQUEE для @vladyasko: бегущая строка === */
+  .nick-track {
+    position: absolute; bottom: 30px; left: 0; right: 0;
+    height: 36px; overflow: hidden; z-index: 5;
+    opacity: 0;
+    animation: fadeIn 0.5s 2.4s forwards;
+  }
+  .nick-marquee {
+    display: inline-flex; gap: 60px;
+    white-space: nowrap;
+    font-weight: 800; font-size: 22px; color: #1A1A1A; letter-spacing: 1px;
+    animation: marquee 18s 2.4s linear infinite;
+    padding-left: 56px;
+  }
+  .nick-marquee span { display: inline-block; }
+  .nick-marquee .dot { color: #E85A2C; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .header {
+    position: absolute; top: 110px; left: 56px; right: 56px; z-index: 4;
+    /* === MASK REVEAL по диагонали === */
+    -webkit-mask-image: linear-gradient(135deg, #000 50%, transparent 50%);
+            mask-image: linear-gradient(135deg, #000 50%, transparent 50%);
+    -webkit-mask-size: 250% 250%;
+            mask-size: 250% 250%;
+    -webkit-mask-position: 100% 100%;
+            mask-position: 100% 100%;
+    animation: maskReveal 1.2s 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes maskReveal {
+    to {
+      -webkit-mask-position: 0% 0%;
+              mask-position: 0% 0%;
+    }
+  }
+
+  /* === NUMBER GLITCH: RGB сдвиг === */
+  .num {
+    font-weight: 900; font-size: 130px; line-height: 1;
+    color: #E85A2C; letter-spacing: -5px; display: inline-block;
+    position: relative;
+    animation: glitchMain 3s 1.4s steps(1) infinite;
+  }
+  .num::before, .num::after {
+    content: '#1';
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+  }
+  .num::before {
+    color: #00E5FF; mix-blend-mode: screen;
+    animation: glitchCyan 3s 1.4s steps(1) infinite;
+  }
+  .num::after {
+    color: #FF0066; mix-blend-mode: screen;
+    animation: glitchRed 3s 1.4s steps(1) infinite;
+  }
+  @keyframes glitchMain {
+    0%, 92%, 100% { transform: translate(0, 0); }
+    93%           { transform: translate(-2px, 1px); }
+    95%           { transform: translate(2px, -1px); }
+    97%           { transform: translate(-1px, 2px); }
+  }
+  @keyframes glitchCyan {
+    0%, 92%, 100% { transform: translate(0, 0); opacity: 0; }
+    93%, 95%, 97% { transform: translate(-3px, 0); opacity: 0.85; }
+    94%, 96%      { transform: translate(0, 0); opacity: 0; }
+  }
+  @keyframes glitchRed {
+    0%, 92%, 100% { transform: translate(0, 0); opacity: 0; }
+    93%, 95%, 97% { transform: translate(3px, 0); opacity: 0.85; }
+    94%, 96%      { transform: translate(0, 0); opacity: 0; }
+  }
+
+  .arch-name {
+    font-weight: 900; font-size: 92px; line-height: 0.98;
+    color: #1A1A1A; letter-spacing: -3px; margin-top: 14px;
+  }
+
+  .tagline {
+    font-weight: 800; font-size: 30px; line-height: 1.18;
+    color: #E85A2C; margin-top: 22px;
+    letter-spacing: -0.2px; max-width: 940px;
+  }
+
+  /* === LOGO: 3D tilt loop (поворот в 3D) === */
+  .logos {
+    position: absolute; top: 470px; left: 0; right: 0;
+    width: 1080px; height: 460px;
+    z-index: 3; overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 0.7s 1.5s forwards;
+    perspective: 1500px;
+  }
+  .logos img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transform-origin: center center;
+    animation: tilt3D 6s 2s ease-in-out infinite;
+  }
+  @keyframes tilt3D {
+    0%, 100% { transform: rotateY(-4deg) rotateX(2deg); }
+    50%      { transform: rotateY(4deg)  rotateX(-2deg); }
+  }
+
+  /* === CARD: flip раскрытие === */
+  .card {
+    position: absolute; bottom: 200px; left: 56px; right: 56px;
+    background: #0A0A0A; border-radius: 24px;
+    padding: 30px 44px; z-index: 3;
+    box-shadow: 0 20px 60px rgba(232, 90, 44, 0.18), 0 4px 12px rgba(0,0,0,0.35);
+    color: #FFFFFF;
+    transform-origin: top center;
+    transform: perspective(1500px) rotateX(-90deg);
+    opacity: 0;
+    animation: cardFlip 0.9s 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes cardFlip {
+    from { transform: perspective(1500px) rotateX(-90deg); opacity: 0; }
+    to   { transform: perspective(1500px) rotateX(0deg); opacity: 1; }
+  }
+
+  .row {
+    display: flex; align-items: baseline;
+    padding: 9px 0; border-bottom: 1px solid #2A2A2A;
+  }
+  .row:last-child { border-bottom: none; padding-bottom: 0; }
+  .row:first-child { padding-top: 0; }
+  .label {
+    width: 180px; flex-shrink: 0;
+    font-weight: 900; font-size: 16px;
+    color: #E85A2C; letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .value {
+    flex: 1; font-weight: 700; font-size: 22px;
+    color: #FFFFFF; line-height: 1.25; letter-spacing: -0.2px;
+  }
+
+  /* === FOOTER: underline drawing (линия рисуется) === */
+  .footer {
+    position: absolute; bottom: 110px; left: 56px; right: 56px;
+    font-weight: 800; font-size: 26px; color: #1A1A1A;
+    line-height: 1.3; letter-spacing: -0.3px; z-index: 4;
+    opacity: 0;
+    animation: fadeIn 0.5s 3s forwards;
+    position: absolute;
+    padding-bottom: 8px;
+  }
+  .footer::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: 0;
+    height: 3px;
+    background: #E85A2C;
+    width: 0;
+    animation: drawLine 1s 3.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes drawLine {
+    to { width: 540px; }
+  }
+
+  .arrow {
+    color: #E85A2C; font-weight: 900;
+    display: inline-block;
+    animation: arrowSpring 1.6s 4.5s ease-in-out infinite;
+  }
+  @keyframes arrowSpring {
+    0%, 100% { transform: translateX(0) scale(1); }
+    50%      { transform: translateX(12px) scale(1.15); }
+  }
+
+  @keyframes fadeIn { to { opacity: 1; } }
+</style></head><body>
+<div class="frame">
+  <div class="grid-overlay"></div>
+  <div class="bookmark"></div>
+  <div class="meta-tl">03/16</div>
+  <div class="header">
+    <span class="num">#1</span>
+    <div class="arch-name">ПРОСТОДУШНЫЙ</div>
+    <div class="tagline">Ищет рай. Боится ошибиться.</div>
+  </div>
+  <div class="logos"><img src="../assets/3d_logos/03_pro.png" alt=""></div>
+  <div class="card">
+    <div class="row"><div class="label">Желание</div><div class="value">Идеальная жизнь. Счастливый финал.</div></div>
+    <div class="row"><div class="label">Страх</div><div class="value">Сделать что-то не так.</div></div>
+    <div class="row"><div class="label">Бренды</div><div class="value">Disney · Coca-Cola · McDonald's</div></div>
+  </div>
+  <div class="footer">Зарабатывает на простоте и оптимизме. <span class="arrow">→</span></div>
+  <div class="nick-track">
+    <div class="nick-marquee">
+      <span>@vladyasko</span><span class="dot">●</span>
+      <span>12 АРХЕТИПОВ</span><span class="dot">●</span>
+      <span>@vladyasko</span><span class="dot">●</span>
+      <span>12 АРХЕТИПОВ</span><span class="dot">●</span>
+      <span>@vladyasko</span><span class="dot">●</span>
+      <span>12 АРХЕТИПОВ</span><span class="dot">●</span>
+    </div>
+  </div>
+</div>
+</body></html>

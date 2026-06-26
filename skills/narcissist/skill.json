@@ -1,0 +1,28 @@
+{
+  "name": "narcissist-communication",
+  "version": "1.0.0",
+  "description": "Агент для эффективной коммуникации с нарциссом. Адаптирует сообщения на основе психологии нарциссизма, используя базу знаний из NotebookLM.",
+  "author": "Vlad Yasko",
+  "commands": [
+    {
+      "name": "narcissist",
+      "description": "Адаптировать сообщение для общения с нарциссом",
+      "usage": "/narcissist [сообщение или JSON с данными]",
+      "examples": [
+        "/narcissist",
+        "/narcissist \"Нет, я не могу дать тебе деньги\"",
+        "/narcissist {\"goal\": \"отказать в просьбе\", \"draft\": \"Не могу помочь\"}"
+      ]
+    }
+  ],
+  "dependencies": {
+    "notebooklm": "~/.claude/skills/notebooklm"
+  },
+  "tags": [
+    "психология",
+    "коммуникация",
+    "нарциссизм",
+    "отношения",
+    "манипуляции"
+  ]
+}

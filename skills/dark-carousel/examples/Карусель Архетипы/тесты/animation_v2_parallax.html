@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1350px; overflow: hidden; background: #EFEAE0; }
+
+  .frame {
+    position: relative; width: 1080px; height: 1350px;
+    background: #EFEAE0;
+    font-family: 'Inter', sans-serif;
+    color: #1A1A1A; overflow: hidden;
+  }
+
+  /* === ПАРАЛЛАКС: 3 слоя на фоне с разной скоростью === */
+  .layer-grid {
+    position: absolute; inset: -40px;
+    background:
+      linear-gradient(#CFC4A8 1px, transparent 1px) 0 0/40px 40px,
+      linear-gradient(90deg, #CFC4A8 1px, transparent 1px) 0 0/40px 40px;
+    opacity: 0.32; pointer-events: none;
+    animation: driftSlow 18s linear infinite;
+  }
+  @keyframes driftSlow {
+    from { transform: translate(0, 0); }
+    to   { transform: translate(40px, 40px); }
+  }
+
+  .layer-dots {
+    position: absolute; inset: -100px;
+    background-image: radial-gradient(circle, #C9B898 1.5px, transparent 1.5px);
+    background-size: 80px 80px;
+    opacity: 0.25; pointer-events: none;
+    animation: driftMid 12s linear infinite;
+  }
+  @keyframes driftMid {
+    from { transform: translate(0, 0); }
+    to   { transform: translate(-80px, 40px); }
+  }
+
+  .layer-blobs {
+    position: absolute; inset: 0; pointer-events: none;
+    opacity: 0.15;
+    background:
+      radial-gradient(circle at 18% 30%, #E85A2C 0%, transparent 28%),
+      radial-gradient(circle at 82% 75%, #1A1A1A 0%, transparent 25%);
+    animation: blobsBreathe 9s ease-in-out infinite;
+  }
+  @keyframes blobsBreathe {
+    0%, 100% { transform: scale(1); opacity: 0.15; }
+    50%      { transform: scale(1.08); opacity: 0.22; }
+  }
+
+  /* === BOOKMARK: glow breathing (плавнее чем pulse) === */
+  .bookmark {
+    position: absolute; top: 36px; left: 56px;
+    width: 38px; height: 60px; background: #E85A2C;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
+    z-index: 5;
+    animation: glowBreath 3s ease-in-out infinite;
+  }
+  @keyframes glowBreath {
+    0%, 100% { filter: drop-shadow(0 0 4px rgba(232, 90, 44, 0.3)); }
+    50%      { filter: drop-shadow(0 0 24px rgba(232, 90, 44, 0.85)); }
+  }
+
+  .meta-tl {
+    position: absolute; top: 56px; left: 116px;
+    font-weight: 800; font-size: 22px; letter-spacing: 0.5px; z-index: 5;
+    opacity: 0;
+    animation: fadeIn 0.6s 0.2s forwards;
+  }
+
+  .nick {
+    position: absolute; bottom: 36px; left: 56px;
+    font-weight: 800; font-size: 22px; color: #1A1A1A; letter-spacing: 8px; z-index: 5;
+    opacity: 0;
+    animation: charStagger 1s 1.5s forwards;
+  }
+  @keyframes charStagger {
+    from { opacity: 0; letter-spacing: 30px; }
+    to   { opacity: 1; letter-spacing: 1px; }
+  }
+
+  .header {
+    position: absolute; top: 110px; left: 56px; right: 56px; z-index: 4;
+  }
+
+  /* === NUMBER: scale-in + subtle pulse === */
+  .num {
+    font-weight: 900; font-size: 130px; line-height: 1;
+    color: #E85A2C; letter-spacing: -5px; display: inline-block;
+    opacity: 0;
+    animation:
+      numIn 0.8s 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+      glowPulse 2.5s 1.2s ease-in-out infinite;
+  }
+  @keyframes numIn {
+    from { opacity: 0; transform: scale(0.3); filter: blur(20px); }
+    to   { opacity: 1; transform: scale(1); filter: blur(0); }
+  }
+  @keyframes glowPulse {
+    0%, 100% { text-shadow: 0 0 0 transparent; }
+    50%      { text-shadow: 0 0 30px rgba(232, 90, 44, 0.5); }
+  }
+
+  /* === TITLE: letter-spacing morph (буквы сходятся) === */
+  .arch-name {
+    font-weight: 900; font-size: 92px; line-height: 0.98;
+    color: #1A1A1A; margin-top: 14px;
+    opacity: 0;
+    animation: letterMorph 1.2s 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes letterMorph {
+    from { opacity: 0; letter-spacing: 40px; filter: blur(8px); }
+    to   { opacity: 1; letter-spacing: -3px; filter: blur(0); }
+  }
+
+  /* === TAGLINE: gradient flow по тексту === */
+  .tagline {
+    font-weight: 800; font-size: 30px; line-height: 1.18;
+    background: linear-gradient(90deg, #E85A2C 0%, #FF8550 50%, #E85A2C 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-top: 22px;
+    letter-spacing: -0.2px; max-width: 940px;
+    opacity: 0;
+    animation:
+      fadeInUp 0.7s 1s forwards,
+      gradientFlow 4s 1.7s linear infinite;
+  }
+  @keyframes gradientFlow {
+    from { background-position: 200% 0; }
+    to   { background-position: -200% 0; }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* === LOGO: Ken Burns (slow zoom + pan) === */
+  .logos {
+    position: absolute; top: 470px; left: 0; right: 0;
+    width: 1080px; height: 460px;
+    z-index: 3; overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 0.8s 1.3s forwards;
+  }
+  .logos img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transform-origin: center;
+    animation: kenBurns 8s 1.3s ease-in-out infinite alternate;
+  }
+  @keyframes kenBurns {
+    from { transform: scale(1) translate(0, 0); }
+    to   { transform: scale(1.12) translate(-15px, -10px); }
+  }
+
+  /* === CARD: scale-in из глубины === */
+  .card {
+    position: absolute; bottom: 200px; left: 56px; right: 56px;
+    background: #0A0A0A; border-radius: 24px;
+    padding: 30px 44px; z-index: 3;
+    box-shadow: 0 20px 60px rgba(232, 90, 44, 0.18), 0 4px 12px rgba(0,0,0,0.35);
+    color: #FFFFFF;
+    opacity: 0;
+    transform-origin: center bottom;
+    animation: cardZoom 0.9s 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes cardZoom {
+    from { opacity: 0; transform: scale(0.85) translateY(40px); filter: blur(10px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+  }
+
+  .row {
+    display: flex; align-items: baseline;
+    padding: 9px 0; border-bottom: 1px solid #2A2A2A;
+  }
+  .row:last-child { border-bottom: none; padding-bottom: 0; }
+  .row:first-child { padding-top: 0; }
+  .label {
+    width: 180px; flex-shrink: 0;
+    font-weight: 900; font-size: 16px;
+    color: #E85A2C; letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .value {
+    flex: 1; font-weight: 700; font-size: 22px;
+    color: #FFFFFF; line-height: 1.25; letter-spacing: -0.2px;
+  }
+
+  .footer {
+    position: absolute; bottom: 86px; left: 56px; right: 56px;
+    font-weight: 800; font-size: 26px; color: #1A1A1A;
+    line-height: 1.3; letter-spacing: -0.3px; z-index: 4;
+    opacity: 0;
+    animation: fadeIn 0.6s 2.1s forwards;
+  }
+
+  .arrow {
+    color: #E85A2C; font-weight: 900;
+    display: inline-block;
+    animation: arrowSlide 1.4s 2.6s ease-in-out infinite;
+  }
+  @keyframes arrowSlide {
+    0%, 100% { transform: translateX(0); opacity: 0.7; }
+    50%      { transform: translateX(14px); opacity: 1; }
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+</style></head><body>
+<div class="frame">
+  <div class="layer-grid"></div>
+  <div class="layer-dots"></div>
+  <div class="layer-blobs"></div>
+  <div class="bookmark"></div>
+  <div class="meta-tl">03/16</div>
+  <div class="header">
+    <span class="num">#1</span>
+    <div class="arch-name">ПРОСТОДУШНЫЙ</div>
+    <div class="tagline">Ищет рай. Боится ошибиться.</div>
+  </div>
+  <div class="logos"><img src="../assets/3d_logos/03_pro.png" alt=""></div>
+  <div class="card">
+    <div class="row"><div class="label">Желание</div><div class="value">Идеальная жизнь. Счастливый финал.</div></div>
+    <div class="row"><div class="label">Страх</div><div class="value">Сделать что-то не так.</div></div>
+    <div class="row"><div class="label">Бренды</div><div class="value">Disney · Coca-Cola · McDonald's</div></div>
+  </div>
+  <div class="footer">Зарабатывает на простоте и оптимизме. <span class="arrow">→</span></div>
+  <div class="nick">@vladyasko</div>
+</div>
+</body></html>
