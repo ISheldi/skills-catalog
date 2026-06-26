@@ -94,7 +94,6 @@ export const SKILL_META: Record<string, SkillMeta> = {
 
   // ───────── Контент (добавлено) ─────────
   'content-system':        { category: 'Контент', date: '26.06', displayName: 'Контент-конвейер', desc: 'Исходник → 7 форматов контента + сохранение в Notion (бандл)' },
-  'dark-carousel':         { category: 'Контент', date: '26.06', displayName: 'Карусель (Dark)', desc: 'Instagram-карусели в тёмном editorial-стиле' },
   'editorial-carousel':    { category: 'Контент', date: '26.06', displayName: 'Editorial-карусель', desc: 'Editorial-карусели для Instagram: текст + рендер в PNG и MP4' },
 
   // ───────── Продукт / Стратегия (добавлено) ─────────
@@ -797,15 +796,6 @@ export const SKILL_ABOUT: Record<string, string> = {
 - Складывает результат в структурированные базы Notion
 
 **Когда использовать:** когда из одного материала нужно быстро собрать много контента с хранением в Notion.`,
-
-  'dark-carousel': `Создаёт Instagram-карусели в тёмном editorial-стиле через Higgsfield + локальный HTML/CSS-рендер.
-
-**Что делает:**
-- Принимает текст, ссылку (YouTube/статью), скриншот или голосовые тезисы
-- Поддерживает 2 формата дизайна (бренд-личность с фото / гибрид Higgsfield+HTML)
-- Генерирует слайды с анимациями через nano_banana_2 и Playwright
-
-**Когда использовать:** когда нужна стильная тёмная карусель с премиальным оформлением.`,
 
   'editorial-carousel': `Собирает editorial-карусели для Instagram в форматах PNG и MP4.
 
