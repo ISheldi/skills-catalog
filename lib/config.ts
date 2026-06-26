@@ -18,7 +18,7 @@ export const SKILL_META: Record<string, SkillMeta> = {
 
   // ───────── Продукт ─────────
   'hormozi-offer':         { category: 'Продукт', date: '12.03', displayName: 'Оффер по Хормози', desc: 'Grand Slam офферы по методологии $100M Offers' },
-  'quiz-funnel':           { category: 'Продукт', date: '11.03', displayName: 'Квиз-воронка', desc: 'Персонализированные квиз-воронки для любого продукта' },
+  'quiz-funnel':           { category: 'Воронки', date: '11.03', displayName: 'Квиз-воронка', desc: 'Персонализированные квиз-воронки для любого продукта' },
   'pricing-strategy':      { category: 'Продукт', date: '20.03', displayName: 'Стратегия ценообразования', desc: 'Ценообразование и упаковка тарифов' },
   'free-tool-strategy':    { category: 'Продукт', date: '20.03', displayName: 'Бесплатный инструмент', desc: 'Бесплатный инструмент как точка входа в воронку' },
   'product-marketing-context': { category: 'Продукт', date: '20.03', displayName: 'Контекст продукта', desc: 'Позиционирование и контекст продукта' },
@@ -35,10 +35,10 @@ export const SKILL_META: Record<string, SkillMeta> = {
   'copywriting':           { category: 'Контент', date: '20.03', displayName: 'Копирайтинг', desc: 'Копирайтинг для лендингов, писем и рекламы' },
   'copy-editing':          { category: 'Контент', date: '20.03', displayName: 'Редактура текста', desc: 'Редактура и шлифовка готовых текстов' },
   'humanizer':             { category: 'Контент', date: '15.03', displayName: 'Humanizer RU', desc: 'Убирает AI-штампы, канцелярит и воду' },
-  'creative-director':     { category: 'Контент', date: '03.06', displayName: 'Креативный директор', desc: 'Концепции кампаний, брифы и фидбек на креативы' },
+  'creative-director':     { category: 'Продукт', date: '03.06', displayName: 'Креативный директор', desc: 'Концепции кампаний, брифы и фидбек на креативы' },
   'creative-ads':          { category: 'Контент', date: '12.03', displayName: 'Конверсионные креативы', desc: 'Статика, видео, Reels с AI-промтами' },
   'ad-creative':           { category: 'Контент', date: '20.03', displayName: 'Рекламные креативы', desc: 'Рекламные креативы с AI-промтами' },
-  'paid-ads':              { category: 'Контент', date: '20.03', displayName: 'Платная реклама', desc: 'Настройка и запуск платной рекламы' },
+  'paid-ads':              { category: 'Воронки', date: '20.03', displayName: 'Платная реклама', desc: 'Настройка и запуск платной рекламы' },
 
   // ───────── Воронки ─────────
   'lead-magnets':          { category: 'Воронки', date: '20.03', displayName: 'Лид-магниты', desc: 'Лид-магниты для сбора заявок' },
@@ -75,15 +75,15 @@ export const SKILL_META: Record<string, SkillMeta> = {
   'ab-test-setup':         { category: 'CRO', date: '20.03', displayName: 'A/B тесты', desc: 'Настройка и анализ A/B-тестов' },
   'churn-prevention':      { category: 'CRO', date: '20.03', displayName: 'Удержание клиентов', desc: 'Снижение оттока и удержание' },
   'analytics-tracking':    { category: 'CRO', date: '20.03', displayName: 'Аналитика', desc: 'Настройка аналитики и трекинга' },
-  'marketing-ideas':       { category: 'CRO', date: '20.03', displayName: 'Маркетинговые идеи', desc: 'Генерация маркетинговых гипотез' },
+  'marketing-ideas':       { category: 'Продукт', date: '20.03', displayName: 'Маркетинговые идеи', desc: 'Генерация маркетинговых гипотез' },
 
   // ───────── Разработка ─────────
   'skill-conductor':       { category: 'Разработка', date: '10.03', featured: true, displayName: 'Skill Conductor', desc: 'Создание, оценка и упаковка скиллов' },
   'skill-conductor-vlad':  { category: 'Разработка', date: '10.03', displayName: 'Skill Conductor (Vlad)', desc: 'Создание и редактирование скиллов' },
-  'frontend-design':       { category: 'Разработка', date: '10.03', displayName: 'Frontend Design', desc: 'Продакшн-интерфейсы с высоким уровнем дизайна' },
-  'ui-ux-pro-max':         { category: 'Разработка', date: '20.03', displayName: 'UI/UX Pro Max', desc: 'Продвинутый UI/UX дизайн интерфейсов' },
-  'superdesign':           { category: 'Разработка', date: '20.03', displayName: 'Super Design', desc: 'Дизайн-система и визуальный стиль' },
-  'nanobanana-pro':        { category: 'Разработка', date: '11.03', displayName: 'NanoBanana Pro', desc: 'Промпт-инжиниринг для генерации изображений' },
+  'frontend-design':       { category: 'Дизайн', date: '10.03', displayName: 'Frontend Design', desc: 'Продакшн-интерфейсы с высоким уровнем дизайна' },
+  'ui-ux-pro-max':         { category: 'Дизайн', date: '20.03', displayName: 'UI/UX Pro Max', desc: 'Продвинутый UI/UX дизайн интерфейсов' },
+  'superdesign':           { category: 'Дизайн', date: '20.03', displayName: 'Super Design', desc: 'Дизайн-агент: ищет референсы и генерирует/итерирует UI-черновики' },
+  'nanobanana-pro':        { category: 'Изображения', date: '11.03', displayName: 'NanoBanana Pro', desc: 'Промпт-инжиниринг для генерации изображений' },
   'notebooklm':            { category: 'Разработка', date: '20.03', displayName: 'NotebookLM Agent', desc: 'Запросы к Google NotebookLM через MCP' },
   'telegram-transcribe':   { category: 'Разработка', date: '20.03', displayName: 'Telegram Транскрибация', desc: 'Транскрибация Telegram аудио и видео' },
   'narcissist':            { category: 'Разработка', date: '16.02', displayName: 'Коммуникация с нарциссом', desc: 'Адаптация сообщений по психологии нарциссизма' },
@@ -93,9 +93,9 @@ export const SKILL_META: Record<string, SkillMeta> = {
   'university-template':   { category: 'Разработка', date: '26.06', displayName: 'University Template', desc: 'Zettelkasten-база знаний для проектов Claude Code' },
 
   // ───────── Контент (добавлено) ─────────
-  'content-pipeline':      { category: 'Контент', date: '26.06', displayName: 'Контент-конвейер', desc: 'Исходник → 7 форматов контента, сохранение в Notion' },
+  'content-system':        { category: 'Контент', date: '26.06', displayName: 'Контент-конвейер', desc: 'Исходник → 7 форматов контента + сохранение в Notion (бандл)' },
   'dark-carousel':         { category: 'Контент', date: '26.06', displayName: 'Карусель (Dark)', desc: 'Instagram-карусели в тёмном editorial-стиле' },
-  'editorial-carousel':    { category: 'Контент', date: '26.06', displayName: 'Editorial-карусель', desc: 'Editorial-карусели для Instagram в PNG и MP4' },
+  'editorial-carousel':    { category: 'Контент', date: '26.06', displayName: 'Editorial-карусель', desc: 'Editorial-карусели для Instagram: текст + рендер в PNG и MP4' },
 
   // ───────── Продукт / Стратегия (добавлено) ─────────
   'oscar-hartman':         { category: 'Продукт', date: '26.06', displayName: 'Оскар Хартманн', desc: 'Стратегический консультант по бизнесу в стиле Хартманна' },
@@ -111,7 +111,7 @@ export const SKILL_META: Record<string, SkillMeta> = {
   'image-to-code':         { category: 'Дизайн', date: '26.06', displayName: 'Image to Code', desc: 'Генерация референсов и вёрстка сайта под них' },
   'redesign-existing-projects':{ category: 'Дизайн', date: '26.06', displayName: 'Редизайн проектов', desc: 'Премиум-апгрейд существующих сайтов и приложений' },
   'stitch-design-taste':   { category: 'Дизайн', date: '26.06', displayName: 'Stitch Design Taste', desc: 'Семантическая дизайн-система для Google Stitch' },
-  'full-output-enforcement':{ category: 'Дизайн', date: '26.06', displayName: 'Full Output Enforcement', desc: 'Запрет обрезанного вывода LLM, полная генерация кода' },
+  'full-output-enforcement':{ category: 'Разработка', date: '26.06', displayName: 'Full Output Enforcement', desc: 'Запрет обрезанного вывода LLM, полная генерация кода' },
 
   // ───────── Изображения ─────────
   'brandkit':              { category: 'Изображения', date: '26.06', displayName: 'Brandkit', desc: 'Генерация бренд-китов: лого-системы, identity-доски' },
@@ -706,13 +706,14 @@ export const SKILL_ABOUT: Record<string, string> = {
 
 **Когда использовать:** при проектировании продуктовых интерфейсов.`,
 
-  'superdesign': `Дизайн-система и единый визуальный стиль продукта.
+  'superdesign': `Дизайн-агент для фронтенд UI/UX: ищет референсы, подбирает направление и генерирует/итерирует дизайн-черновики на «бесконечном холсте».
 
 **Что делает:**
-- Помогает выстроить дизайн-систему (цвета, типографика, компоненты)
-- Держит визуал продукта единообразным
+- Подбирает визуальные референсы и стиль под задачу
+- Генерирует черновики экранов и страниц, дорабатывает их по итерациям
+- Может выстроить и дизайн-систему (цвета, типографика, компоненты) — как один из режимов
 
-**Когда использовать:** когда продукт растёт и нужен системный дизайн.`,
+**Когда использовать:** когда нужно быстро проработать и проитерировать UI/UX-дизайн до имплементации.`,
 
   'nanobanana-pro': `Промпт-инжиниринг для генерации изображений (Nano Banana / Gemini 3 Pro Image).
 
@@ -787,7 +788,7 @@ export const SKILL_ABOUT: Record<string, string> = {
 **Когда использовать:** когда нужно системно накапливать и проверять знания внутри проекта.`,
 
   // ───────── Контент (добавлено) ─────────
-  'content-pipeline': `Контент-конвейер: автоматически превращает один исходник в пачку готового контента и сохраняет всё в Notion.
+  'content-system': `Контент-конвейер (бандл «Content System»): автоматически превращает один исходник в пачку готового контента и сохраняет всё в Notion. Включает набор команд (короткий/длинный пост, карусель, Reels, статья, контент).
 
 **Что делает:**
 - Берёт текст, транскрипцию или статью как источник
